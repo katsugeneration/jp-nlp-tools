@@ -6,6 +6,8 @@ from jp_nlp_tools.tokenizer import ITokenizer
 class VectorizerFactory:
     """Scikit-learn format vectorizer factory ."""
 
+    stop_words = ['。', 'は', '、', 'の', '（', '）', 'に', 'で', 'を', 'た', 'し', 'が', 'と', 'て', 'ある', 'れ', 'さ', 'する', 'いる', 'から', 'も', '・', 'として', '「', '」', 'い', 'こと', '–', 'な', 'なっ', 'や', 'れる', 'など', 'ため', 'この', 'まで', 'また', 'あっ', 'ない', 'あり', 'なる', 'その', 'られ', '後', '『', '』', 'へ']
+
     @classmethod
     def generate(
             cls,
@@ -24,5 +26,6 @@ class VectorizerFactory:
             input='content',
             encoding='utf-8',
             decode_error='ignore',
-            tokenizer=tokenizer.tokenize)
+            tokenizer=tokenizer.tokenize,
+            stop_words=cls.stop_words)
         return _vectorizer
