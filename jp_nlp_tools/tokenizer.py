@@ -1,5 +1,24 @@
 from typing import List
+from abc import ABCMeta, abstractmethod
 import MeCab
+
+
+class ITokenizer(metaclass=ABCMeta):
+    """Tokenize text interface."""
+
+    @abstractmethod
+    def tokenize(
+            self,
+            text: str) -> List[str]:
+        """Tokenize target text to str list.
+
+        Args:
+            text (str): target text.
+
+        Return:
+            tokenized (List[str]): tokenized stringss.
+        """
+        pass
 
 
 class MeCabTokenizer(object):
