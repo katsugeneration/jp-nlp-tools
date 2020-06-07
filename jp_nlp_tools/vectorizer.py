@@ -1,4 +1,4 @@
-from typing import Type
+from typing import Type, Tuple
 from sklearn.feature_extraction.text import _VectorizerMixin
 from jp_nlp_tools.tokenizer import ITokenizer
 
@@ -12,12 +12,14 @@ class VectorizerFactory:
     def generate(
             cls,
             class_: Type[_VectorizerMixin],
-            tokenizer: ITokenizer) -> _VectorizerMixin:
+            tokenizer: ITokenizer,
+            ngram_range: Tuple[int, int] = (1, 1)) -> _VectorizerMixin:
         """Generate vectorizer with tokenizer.
 
         Args:
             class_ (Type[_VectorizerMixin]): scikit-learn vectorizer class.
             tokenizer (ITokenizer): tokenizer instance.
+            ngram_range (Tuple): ngram range definition.
 
         Return:
             vectorizer (_VectorizerMixin): initilized vectorizer instance.
@@ -27,5 +29,6 @@ class VectorizerFactory:
             encoding='utf-8',
             decode_error='ignore',
             tokenizer=tokenizer.tokenize,
-            stop_words=cls.stop_words)
+            stop_words=cls.stop_words,
+            ngram_range=ngram_range)
         return _vectorizer
